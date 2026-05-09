@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER/LOGIN</title>
+    <link rel="icon" href="Saved Pictures/icon.jpg">
+    <style>
+        .submit-success, .submit-error {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .submit-success {
+            color: green;
+        }
+        .submit-error {
+            color: red;
+        }
+        body {
+            cursor: pointer;
+            background-image: url('Saved Pictures/userimage1.jpg');
+            margin-top: 180px;
+            margin-left: 180px;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+    <script>
+        function generateUserId() {
+            return Math.floor(100000 + Math.random() * 900000); 
+        }
+
+        function showmessage(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const username = document.getElementById('username').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const email = document.getElementById('email').value;
+            const userIdField = document.getElementById('user-id');
+            const phoneNumberPattern = /^[0-9]{10}$/;
+
+            document.querySelector('.submit-success').style.display = 'none';
+            document.querySelector('.submit-error').style.display = 'none';
+
+            if (password !== confirmPassword) {
+                document.querySelector('.submit-error').style.display = 'block';
+                document.querySelector('.submit-error').textContent = 'Error: Passwords do not match.';
+                return;
+            }
+
+            if (!/^[a-zA-Z0-9]{5,}$/.test(username)) {
+                document.querySelector('.submit-error').style.display = 'block';
+                document.querySelector('.submit-error').textContent = 'Error: Username must be at least 5 characters long and contain only letters and numbers.';
+                return;
+            }
+
+            if (!phoneNumberPattern.test(phoneNumber)) {
+                document.querySelector('.submit-error').style.display = 'block';
+                document.querySelector('.submit-error').textContent = 'Error: Phone number must be 10 digits.';
+                return;
+            }
+            const generatedId = generateUserId();
+            userIdField.value = generatedId;
+            document.querySelector('.submit-success').style.display = 'block';
+            alert(`Your ID: ${generatedId} has been generated and mailed to ${email}! 🎉`);
+            console.log(`Email sent to ${email} with User ID: ${generatedId}`);
+        }
+    </script>
+</head>
+<body>
+    <h2 style="font-family:cursive;font-size: xx-large;margin-top: 180px;margin-left: 180px;"><b>USER/LOGIN</b></h2>
+    <form onsubmit="showmessage(event)">
+        <table>
+            <tr>
+                <td style="font-size:xx-large;">USERNAME</td>
+                <td><input type="text" id="username" placeholder="Enter your username" required></td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">NAME</td>
+                <td><input type="text" placeholder="Enter your name" required></td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">GENDER</td>
+                <td>
+                    <select required>
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">EMAIL</td>
+                <td><input type="email" id="email" placeholder="Enter your email" required></td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">USER ID</td>
+                <td><input type="text" id="user-id" placeholder="Generated User ID" readonly></td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">PHONE NUMBER</td>
+                <td><input type="text" id="phone-number" placeholder="Enter your phone number" required></td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">PASSWORD</td>
+                <td><input type="password" id="password" placeholder="Enter your password" required></td>
+            </tr>
+            <tr>
+                <td style="font-size:xx-large;">CONFIRM PASSWORD</td>
+                <td><input type="password" id="confirm-password" placeholder="Confirm your password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button type="submit">Register</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="submit-success"><p>YOUR ID HAS BEEN CREATED AND MAILED! 📧🎉</p></div>
+    <div class="submit-error"><p>Error: Please fill out all required fields.</p></div>
+</body>
+</html>

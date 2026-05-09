@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPOINTMENT SCHEDULING</title>
+    <link rel="icon" href="Saved Pictures/icon.jpg">
+    <style>
+        body {
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body style="background-image:url(Saved\ Pictures/appbackimage2.jpg);background-repeat:no-repeat;background-size:cover;background-position: center;">
+    <form id="appointment-form">
+        <h1 style="font-family: cursive;"><b>APPOINTMENT SCHEDULING</b></h1>
+        <h2><b>Appointment Booking</b></h2>
+
+        <table>
+            <tr>
+                <td style="font-size:larger;">Name</td>
+                <td><input type="text" id="name" placeholder="Enter your name" required></td>
+                <td style="font-size:larger;">Contact number</td>
+                <td><input type="tel" id="contact" placeholder="Enter your mobile number" pattern="\d{10}" title="Please enter a valid 10-digit phone number" required></td>
+            </tr>
+            <tr>
+                <td style="font-size:larger;">Hospital Name</td>
+                <td><input type="text" id="hospital" placeholder="Enter hospital name" required></td>
+                <td style="font-size:larger;">Doctor/Specialist</td>
+                <td>
+                    <select id="doctor" required>
+                        <option value="">Select your doctor</option>
+                        <option>Cardiologist</option>
+                        <option>Dermatologist</option>
+                        <option>Neurologist</option>
+                        <option>Gynecologist</option>
+                        <option>Pediatrician</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:larger;">Appointment Type</td>
+                <td>
+                    <select id="appointmentType" required>
+                        <option value="">Select Type</option>
+                        <option>Inpatient</option>
+                        <option>Outpatient</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:medium;">Reason For Visit</td>
+                <td><input type="text" id="reason" placeholder="Enter your reason" required></td>
+                <td style="font-size:medium;">Date For Your Appointment</td>
+                <td><input type="date" id="date" required></td>
+                <td style="font-size:medium;">Appointment Time</td>
+                <td><input type="time" id="time" required></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Schedule</button>
+                    <button type="reset">Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    <hr>
+    <h2><b>Appointment History</b></h2>
+    <table id="history-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Hospital</th>
+                <th>Doctor</th>
+                <th>Type</th>
+                <th>Reason</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const contact = document.getElementById('contact').value;
+            if (!/^\d{10}$/.test(contact)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const hospital = document.getElementById('hospital').value;
+            const doctor = document.getElementById('doctor').value;
+            const appointmentType = document.getElementById('appointmentType').value;
+            const reason = document.getElementById('reason').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const historyTable = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+            const newRow = historyTable.insertRow();
+
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>${contact}</td>
+                <td>${hospital}</td>
+                <td>${doctor}</td>
+                <td>${appointmentType}</td>
+                <td>${reason}</td>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td><button onclick="deleteAppointment(this)">Delete</button></td>
+            `;
+            document.getElementById('appointment-form').reset();
+        });
+
+        function deleteAppointment(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+    
+    <hr>
+    <h2><b>FOR PAYMENT DETAIL CONTACT HERE</b></h2>
+    <a href="payment.html"><img src="Saved Pictures/payment icon.gif" alt="payment icon" style="width: 100px;height: 100px;vertical-align: middle;margin-right:5px;">PAYMENT/BILLING</a>
+    <hr>
+</body>
+</html>

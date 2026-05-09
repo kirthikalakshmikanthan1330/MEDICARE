@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT US</title>
+    <link rel="icon" href="Saved Pictures/icon.jpg">
+    <style>
+        body{
+            cursor: pointer;
+            font-family: cursive;
+        }
+        .slider {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .slide img {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: auto;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+    </style>
+</head>
+<body style="background-image: url('Saved Pictures/contact.avif'); background-repeat: no-repeat; background-position: center center; background-size: cover; background-attachment: fixed; height: 100vh; margin: 0;">
+<H2>CONTACT US</H2>
+<P>We would love to hear from you! Whether you have questions, feedback, or need assistance, please don’t hesitate to reach out to us. Here are the ways you can contact </P>
+<HR></HR>
+<H2>CUSTOMER SUPPORT</H2>
+<P>Phone:+91 9159679455</P>  
+<P>Email:support@yourhealthcaresystem.com  </P>
+<HR></HR>
+<H2>SOCIAL MEDIA</H2>
+<P>Stay connected with us through our social media channels:</P>
+   <p><a href="//facebook.com/yourhealthcaresystem" >Facebook</a></p> 
+    <p><a href="//twitter.com/yourhealthsystem">Twitter</a></p>
+    <p><a href="//instagram.com/yourhealthsystem">Instagram</a></p>
+<HR></HR>
+<H2>FOR MORE INFORMATION YOU CAN CONTACT HERE</H2>
+<body>
+    <div class="slider">
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <div class="slider-container">
+            <div class="slide"><a href="feedback.html"><img src="Saved Pictures/feedback.gif" alt="Feedback"><p>FEEDBACK FORM</p></a></div>
+            <div class="slide"><a href="emergency.html"><img src="Saved Pictures/emergency.gif" alt="Emergency"><p>EMERGENCY SERVICE</p></a></div>
+            <div class="slide"><a href="reports.html"><img src="Saved Pictures/report.gif" alt="Reports"><p>REPORTS AND ANALYTICS</p></a></div>
+            <div class="slide"><a href="lab.html"><img src="Saved Pictures/lab.gif" alt="Lab"><p>LABORATORY AND TEST MANAGEMENT</p></a></div>
+            <div class="slide"><a href="patientaccom.html"><img src="Saved Pictures/accom.gif" alt="Accommodation"><p>PATIENT ACCOMMODATION</p></a></div>
+            <div class="slide"><a href="pharmacy.html"><img src="Saved Pictures/pharmacy.gif" alt="Pharmacy"><p>PHARMACY MANAGEMENT</p></a></div>
+            <div class="slide"><a href="healtinsu.html"><img src="Saved Pictures/health insurance.gif" alt="Insurance"><p>HEALTH INSURANCE</p></a></div>
+            <div class="slide"><a href="staff.html"><img src="Saved Pictures/staff.gif" alt="Staff"><p>STAFF MANAGEMENT</p></a></div>
+        </div>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    
+    <script>
+        let currentIndex = 0;
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+            document.querySelector('.slider-container').style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    </script>
+</body>
+</html>
